@@ -134,19 +134,23 @@ export default function Assistant({ quizScore = null, totalQuestions = 5 }) {
 
     // 3. Call Gemini proxy with full conversation history for context
     setIsLoading(true);
+    
+    // Build conversation history for Gemini multi-turn context
+    const history = messages
+      .filter(m => m.role !== 'assistant' || messages.indexOf(m) !== 0) // skip greeting
+      .slice(-6) // last 6 messages for context window
+      .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
+      .join('\n');
+
+    const contextPrompt = quizScore !== null
+      ? `[User context: scored ${quizScore}/${totalQuestions} on the election quiz]\n`
+      : '';
+
+    // In production (Cloud Run), API is on same server. In dev, use local proxy.
+    const API_BASE = import.meta.env.PROD ? '' : 'http://localhost:3001';
+
     try {
-      // Build conversation history for Gemini multi-turn context
-      const history = messages
-        .filter(m => m.role !== 'assistant' || messages.indexOf(m) !== 0) // skip greeting
-        .slice(-6) // last 6 messages for context window
-        .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
-        .join('\n');
-
-      const contextPrompt = quizScore !== null
-        ? `[User context: scored ${quizScore}/${totalQuestions} on the election quiz]\n`
-        : '';
-
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -159,10 +163,12 @@ export default function Assistant({ quizScore = null, totalQuestions = 5 }) {
       if (!response.ok) throw new Error('Server error');
       const data = await response.json();
       simulateTyping(data.reply);
-    } catch {
+    } catch (err) {
+      console.error('Chat error:', err);
       simulateTyping('I can answer questions about voter registration, EVMs, Lok Sabha, and more! Try tapping one of the suggested questions below, or call the **National Voter Helpline: 1950** for official assistance.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
