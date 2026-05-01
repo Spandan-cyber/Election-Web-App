@@ -3,7 +3,52 @@
 [![Live Demo](https://img.shields.io/badge/Live-Demo-orange?style=for-the-badge&logo=google-cloud&logoColor=white)](https://election-web-app-11120183339.us-central1.run.app)
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Spandan-cyber/Election-Web-App)
 
-**ElectIndia** is a premium, interactive web application designed to educate Indian citizens about the democratic process. Built with a stunning tricolor aesthetic, it combines modern web technology with AI-powered guidance to make civic education engaging and accessible.
+**ElectIndia** is a premium, interactive web application designed to bridge the gap between complex democratic procedures and citizen understanding. Built with a stunning Indian tricolor aesthetic, it combines modern web technology with AI-powered guidance to make civic education engaging, accessible, and secure for every Indian voter.
+
+## 📖 Project Overview
+
+In the world's largest democracy, understanding the nuances of the electoral process can be daunting. ElectIndia serves as a digital companion that simplifies this journey. Whether you are a first-time voter looking to register or a seasoned citizen wanting to test your knowledge of the Lok Sabha, this platform provides a centralized, interactive hub for all things election-related.
+
+### The Mission
+- **Democratize Knowledge**: Make election rules and procedures easy to digest.
+- **Empower First-Time Voters**: Guide the youth through their first democratic milestone.
+- **Ensure Security**: Showcase best practices in protecting sensitive API keys through robust backend architecture.
+
+---
+
+## 📊 System Architecture & Flow
+
+### 🏗️ Application Logic
+ElectIndia uses a secure proxy architecture to protect AI credentials and ensure smooth performance.
+
+```mermaid
+graph TD
+    A[User Browser] -->|React Frontend| B(Express Backend Proxy)
+    B -->|Rate Limiting & Sanitization| C{Security Layer}
+    C -->|Authorized Request| D[Google Gemini API]
+    D -->|AI Response| B
+    B -->|Cleaned Data| A
+    
+    style B fill:#FF9933,stroke:#333,stroke-width:2px
+    style D fill:#138808,stroke:#333,stroke-width:2px
+```
+
+### 🗺️ User Journey
+The platform is designed to take users through a logical learning path.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant App as ElectIndia UI
+    participant AI as Gemini Assistant
+
+    User->>App: Lands on Home (Tricolor Theme)
+    App->>User: Shows Interactive Voting Steps
+    User->>App: Takes Educational Quiz
+    App->>User: Displays Score & Feedback
+    User->>AI: Asks "How do I use Form 6?"
+    AI->>User: Provides personalized registration help
+```
 
 ---
 
