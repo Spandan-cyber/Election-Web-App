@@ -66,6 +66,15 @@ function Flashcard({ term, definition, colors, index }) {
       whileHover={{ scale: 1.03 }}
       style={{ height: '220px', perspective: '1000px', cursor: 'pointer' }}
       onClick={() => setIsFlipped(!isFlipped)}
+      role="button"
+      tabIndex={0}
+      aria-label={`Flashcard for ${term}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setIsFlipped(!isFlipped);
+        }
+      }}
     >
       <motion.div
         animate={{ rotateY: isFlipped ? 180 : 0 }}

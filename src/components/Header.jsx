@@ -43,7 +43,7 @@ export default function Header() {
         </div>
 
         {/* Nav */}
-        <nav style={{ display: 'none' }} className="md:flex gap-8 items-center">
+        <nav aria-label="Main Navigation" style={{ display: 'none' }} className="md:flex gap-8 items-center">
           {[['Guide', '#guide'], ['Timeline', '#timeline'], ['Terms', '#terms'], ['Quiz', '#quiz'], ['News', '#news']].map(([label, href]) => (
             <a
               key={label}

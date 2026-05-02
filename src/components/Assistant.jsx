@@ -183,6 +183,7 @@ export default function Assistant({ quizScore = null, totalQuestions = 5 }) {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
+            aria-label="Open chat assistant"
             style={{
               width: '62px', height: '62px', borderRadius: '50%',
               background: 'linear-gradient(135deg, #FF9933, #E8821A)',
@@ -243,7 +244,7 @@ export default function Assistant({ quizScore = null, totalQuestions = 5 }) {
                   </p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} style={{ color: 'white', opacity: 0.8, padding: '4px' }}>
+              <button onClick={() => setIsOpen(false)} aria-label="Close chat assistant" style={{ color: 'white', opacity: 0.8, padding: '4px' }}>
                 <X size={20} />
               </button>
             </div>
@@ -338,6 +339,7 @@ export default function Assistant({ quizScore = null, totalQuestions = 5 }) {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask about Indian elections..."
                 disabled={isLoading || isTyping}
+                aria-label="Chat input"
                 style={{
                   flex: 1, padding: '0.6rem 1rem',
                   borderRadius: '999px',
@@ -354,6 +356,7 @@ export default function Assistant({ quizScore = null, totalQuestions = 5 }) {
                 type="submit"
                 whileTap={{ scale: 0.9 }}
                 disabled={isLoading || isTyping}
+                aria-label="Send message"
                 style={{
                   width: '40px', height: '40px', borderRadius: '50%',
                   background: 'linear-gradient(135deg, #FF9933, #E8821A)',
