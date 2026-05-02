@@ -14,17 +14,17 @@ vi.mock('./components/Assistant', () => ({ default: () => <div data-testid="assi
 vi.mock('./components/CustomCursor', () => ({ default: () => <div data-testid="custom-cursor">CustomCursor</div> }));
 
 describe('App Component', () => {
-  it('renders all main components', () => {
+  it('renders all main components', async () => {
     render(<App />);
     
-    expect(screen.getByTestId('header')).toBeInTheDocument();
-    expect(screen.getByTestId('hero')).toBeInTheDocument();
-    expect(screen.getByTestId('voting-steps')).toBeInTheDocument();
-    expect(screen.getByTestId('timeline')).toBeInTheDocument();
-    expect(screen.getByTestId('flashcards')).toBeInTheDocument();
-    expect(screen.getByTestId('quiz')).toBeInTheDocument();
-    expect(screen.getByTestId('news')).toBeInTheDocument();
-    expect(screen.getByTestId('assistant')).toBeInTheDocument();
+    expect(await screen.findByTestId('header')).toBeInTheDocument();
+    expect(await screen.findByTestId('hero')).toBeInTheDocument();
+    expect(await screen.findByTestId('voting-steps')).toBeInTheDocument();
+    expect(await screen.findByTestId('timeline')).toBeInTheDocument();
+    expect(await screen.findByTestId('flashcards')).toBeInTheDocument();
+    expect(await screen.findByTestId('quiz')).toBeInTheDocument();
+    expect(await screen.findByTestId('news')).toBeInTheDocument();
+    expect(await screen.findByTestId('assistant')).toBeInTheDocument();
   });
 
   it('renders the footer text', () => {
